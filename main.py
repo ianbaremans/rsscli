@@ -1,5 +1,6 @@
 import feedparser
 import argparse
+import webbrowser
 
 # parsing the arguments
 parser = argparse.ArgumentParser(description="How to use rsscli:")
@@ -9,8 +10,11 @@ parser.add_argument("feed", metavar="F", type=str,
         help="A string which contains the feed url")
 
 args = parser.parse_args()
-print(args.accumulate())
 
-feed = feedparser.parse("https://news.ycombinator.com/rss")
-print(feed.entries[0].link)
+feed = feedparser.parse(args.feed)
+articles = args.articles[0]
+
+for i in range(0, articles):
+    print(feed.entries[i].title+": "+feed.entries[i].link)
+    # TODO: make the titles clickable links
 
